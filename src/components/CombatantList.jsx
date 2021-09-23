@@ -1,41 +1,33 @@
-import React from 'react'
-import '../App.css'
-// import Combatant from 'combatant'
+import Combatant from "./Combatant";
 
-function CombatantList() {
-    // const [combatList, setCombatList] = React.useState('Entry')
-    // Where I map combatantList this will be mapped onto Combatant component.  
-
-    let combatantList = [{ 
-        'name': 'James', 
-        'roll': 23,
-        'userType': 'DM'
-      },
-      {
-        'name': 'Bob', 
-        'roll': 5, 
-        'userType': 'Player'
-      }]
-
+const CombatantList = ({ combatantList, removeCombatant }) => {
+  const combatantMap = combatantList.map((data, index) => {
     return (
-        <div>
-            <h1>Combatant List:</h1>
-            <br></br>
+      <Combatant
+        key={`${data.name}${data.score}`}
+        name={data.name}
+        score={data.score}
+        typeOfEntry={data.typeOfEntry}
+        colorOfModal={data.colorOfModal}
+        removeCombatant={removeCombatant}
+        index={index}
+      />
+    );
+  });
 
+  const sortList = () => {
+    combatantList.sort((a, b) => {
+      return b.score - a.score;
+    });
+  };
 
-{combatantList.map((i) => (
-              <div>
-                <p>{i.name}</p>
-                <p>{i.roll}</p>
-                <p>{i.userType}</p>
-                <br></br>
-              </div>
-            ))}
+  sortList();
 
-        </div>
-    )
-}
+  return (
+    <div className="combatant-list">
+      <div>{combatantMap}</div>
+    </div>
+  );
+};
 
-export default CombatantList
-
-// This will be in state. Just putting this in statically for now. 
+export default CombatantList;

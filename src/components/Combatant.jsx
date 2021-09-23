@@ -1,17 +1,30 @@
-import React from 'react'
+import React from "react";
+import Button from "../utils/Button";
 
-function Combatant() {
-    const [name, setName] = React.useState('name')
-    const [roll, setRoll] = React.useState('roll') 
-    const [userType, setUserType] = React.useState('userType')
+const Combatant = ({
+  typeOfEntry,
+  removeCombatant,
+  name,
+  score,
+  colorOfModal: colorOfDiv,
+  index,
+}) => {
+  return (
+    <div
+      style={{ backgroundColor: colorOfDiv }}
+      className="container combatant-row"
+    >
+      <p>{typeOfEntry}</p>
+      <p>{name}</p>
+      <p>{score}</p>
+      <Button
+        text="X"
+        color="#6D668Fff"
+        className="btn btn-small"
+        onClick={() => removeCombatant(index)}
+      />
+    </div>
+  );
+};
 
-    return (
-        <div>
-            <p>{name}</p>
-            <p>{roll}</p>
-            <p>{userType}</p>
-        </div>
-    )
-}
-
-export default Combatant
+export default Combatant;
